@@ -1,6 +1,6 @@
 <script>
   import Dropzone from "svelte-file-dropzone";
-  import { setAppStatusLoading } from "../store";
+  import { setAppStatusChatMode, setAppStatusLoading } from "../store";
 
   let files = {
     accepted: [],
@@ -9,7 +9,6 @@
 
   async function handleFilesSelect(e) {
     const { acceptedFiles, fileRejections } = e.detail;
-    console.log(acceptedFiles);
     files.accepted = [...files.accepted, ...acceptedFiles];
     files.rejected = [...files.rejected, ...fileRejections];
 
@@ -24,19 +23,25 @@
         body: formData,
       });
 
-      if(!res.ok){
-        
+      if (!res.ok) {
+        setAppStatusError();
+        return;
       }
 
-
-
+      const { id, url, pages } = await res.json();
+      setAppStatusChatMode({ id, url, pages });
     }
   }
 </script>
 
-<Dropzone multiple={false} accept="application/pdf" on:drop={handleFilesSelect}
-  >Arrastra aqui tu PDF</Dropzone
->
+{#if files.accepted.length === 0}
+  <Dropzone
+    multiple={false}
+    accept="application/pdf"
+    on:drop={handleFilesSelect}>Arrastra aqui tu PDF</Dropzone
+  >
+{/if}
+
 <ol>
   {#each files.accepted as item}
     <li>{item.name}</li>
