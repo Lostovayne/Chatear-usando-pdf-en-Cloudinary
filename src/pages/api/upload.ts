@@ -32,7 +32,7 @@ export const POST: APIRoute = async ({ request }) => {
 
   const { asset_id: id, url, pages } = result;
 
-  // console.log(result);
+  console.log(result);
 
   // simular el delay
   await new Promise((resolve) => setTimeout(resolve, 3000));
