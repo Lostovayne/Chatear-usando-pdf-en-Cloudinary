@@ -30,7 +30,7 @@ export const POST: APIRoute = async ({ request }) => {
   const unit8Array = new Uint8Array(arrayBuffer);
   const result = await UploadStream(unit8Array, { folder: "pdf" });
 
-  const { asset_id: id, url, pages } = result;
+  const { asset_id: id, secure_url: url, pages } = result;
 
   console.log(result);
 
