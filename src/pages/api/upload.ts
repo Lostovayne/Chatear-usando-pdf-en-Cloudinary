@@ -13,10 +13,12 @@ const UploadStream = async (
   options: { folder: string }
 ): Promise<UploadApiResponse> => {
   return new Promise((resolve, reject) => {
-    cloudinary.uploader.upload_stream(options, (error, result) => {
-      if (result) return resolve(result);
-      reject(error);
-    }).end(buffer);
+    cloudinary.uploader
+      .upload_stream(options, (error, result) => {
+        if (result) return resolve(result);
+        reject(error);
+      })
+      .end(buffer);
   });
 };
 

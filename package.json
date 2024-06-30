@@ -21,6 +21,7 @@
     "typescript": "^5.4.5"
   },
   "devDependencies": {
+    "@types/node": "^20.14.9",
     "flowbite": "^2.3.0",
     "flowbite-svelte": "^0.46.1"
   }
